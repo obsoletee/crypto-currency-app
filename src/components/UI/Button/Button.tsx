@@ -3,13 +3,13 @@ import styles from './Button.module.scss';
 
 interface ButtonProps {
 	children?: React.ReactChild | React.ReactDOM;	
-	clickHandler?: Event;
+	onClick?: Function;
 }
 
-const Button: FC<ButtonProps> = ({children, clickHandler}) => {
+const Button: FC<ButtonProps> = ({children, onClick}) => {
 
 	return (
-		<button onClick={clickHandler} className={styles.button}>{children}</button>
+		<button onClick={onClick} className={styles.button}>{children}</button>
 	)
 
 }

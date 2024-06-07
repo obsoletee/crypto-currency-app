@@ -19,7 +19,7 @@ const Pagination: FC<PaginationProps> = ({page, setPage}) => {
 
 	const nextPage = (e: React.MouseEvent<HTMLButtonElement>) => {
 		e.preventDefault;
-		page === 2000 
+		page === 2000
 		? setPage(2000)
 		: setPage(page += 10);
 	}
