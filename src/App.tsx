@@ -1,13 +1,13 @@
 import { useState } from 'react'
 import Header from './components/Header/Header'
-import Table from './components/Table/Table'
+import Container from './components/Container/Container'
 
 function App() {
 
   return (
 		<>
 		<Header/>
-		<Table/>
+		<Container/>
 		</>
   )
 }
