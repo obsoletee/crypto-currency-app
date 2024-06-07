@@ -1,33 +1,29 @@
-import React, { useEffect, useState } from "react";
+import React, { FC, useEffect, useState } from "react";
 import styles from './Container.module.scss';
-import TableRow from "../TableRow/TableRow";
-import axios from "axios";
-import Cryptservice from "../../services/CryptService";
 import CryptTable from "../CryptTable/CryptTable";
 import Loader from "../UI/Loader/Loader";
 
-export default function Container() {
+interface ContainerProps {
+	dataError: string;
+	isPostLoading: boolean;
+	cryptData: object;
+	page: number;
+	setPage: Function;
+}
 
-	async function fetchData() {
-		setIsPostLoading(true);
-		const cryptList = await Cryptservice.getAllData();
-		setCryptData(cryptList);
-		setIsPostLoading(false);
-	}
-
-	useEffect(() => {
-		fetchData();
-	}, [])
-
-	const [cryptData, setCryptData] = useState([]);
-	const [isPostLoading, setIsPostLoading] = useState(false);
+const Container: FC<ContainerProps> = ({dataError, isPostLoading, cryptData, page, setPage}) => {
 
 	return (
 		<div className={styles.tableContainer}>
+			{dataError &&
+				<div>Произошла ошибка: {dataError}</div>
+			}
 			{isPostLoading
 				? <Loader/>
-				: <CryptTable cryptData={cryptData}/>
+				: <CryptTable setPage={setPage} page={page} cryptData={cryptData}/>
 			}
 		</div>
 	)
 }
+
+export default Container;

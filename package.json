@@ -10,9 +10,15 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@storybook/addon-actions": "^8.1.6",
+    "@storybook/addon-essentials": "^8.1.6",
+    "@storybook/addon-links": "^8.1.6",
+    "antd": "^5.18.0",
     "axios": "^1.7.2",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "react-query": "^3.39.3",
+    "storybook": "^8.1.6"
   },
   "devDependencies": {
     "@types/react": "^18.2.66",
