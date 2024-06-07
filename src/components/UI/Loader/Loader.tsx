@@ -5,7 +5,7 @@ const Loader = () => {
 	return (
 		<div className={styles.container}>
 			<div className={styles.loader}></div>
-			<div className={styles.desc}>Загрузка...</div>
+			<div className={styles.desc}>Loading...</div>
 		</div>
 	)
 }

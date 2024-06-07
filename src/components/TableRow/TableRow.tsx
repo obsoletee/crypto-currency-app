@@ -11,10 +11,12 @@ export interface TableRowData {
 
 const TableRow: FC<TableRowData> = ({symbol, price, marketCap, change}) => {
 	
+	const LOGO_LINK = "https://assets.coincap.io/assets/icons/" + symbol.toLowerCase() + "@2x.png"
+
 	return (
 		<tr>
 				<td key='symbol' className={styles.tableBodyCell}>{symbol}</td>
-				<td key="logo" className={styles.tableBodyCell}>logo</td>
+				<td key="logo" className={styles.tableBodyCell}><img width='32px' height="32px" src={LOGO_LINK} alt="logo"/></td>
 				<td key="price" className={styles.tableBodyCell}>{Number(price).toFixed(2)}</td>
 				<td key="marketCap" className={styles.tableBodyCell}>{Number(marketCap).toFixed(2)}</td>
 				{Number(change) > 0

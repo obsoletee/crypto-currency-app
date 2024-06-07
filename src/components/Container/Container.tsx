@@ -16,7 +16,7 @@ const Container: FC<ContainerProps> = ({dataError, isPostLoading, cryptData, pag
 	return (
 		<div className={styles.tableContainer}>
 			{dataError &&
-				<div>Произошла ошибка: {dataError}</div>
+				<div>Error: {dataError}</div>
 			}
 			{isPostLoading
 				? <Loader/>
