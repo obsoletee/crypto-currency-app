@@ -1,22 +1,22 @@
-@import "./fonts.scss";
+@import "../scss/fonts.scss";
 
 .header {
 	width: 100%;
 	overflow: hidden;
 	background-color: rgb(204, 204, 204);
 
-	& .header__container {
+	& .container {
 		padding: 30px 5%;
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
 		width: 100%;
 
-		& .container__info {
+		& .info {
 			display: flex;
 			justify-content: center;
 
-			& .container__info__title {
+			& .title {
 				font-family: PTSans;
 				font-size: 36px;
 				line-height: 48px;
@@ -24,7 +24,7 @@
 				margin: 0 5px 0 0;
 			}
 
-			& .container__info__logo {
+			& .logo {
 				width: 48px;
 				height: 48px;
 				& img {
@@ -34,13 +34,13 @@
 			}
 		}
 
-		& .container__crypto {
+		& .crypto {
 			display: flex;
 			flex-direction: column;
 			justify-content: center;
 			align-content: space-between;
 
-			& .container__crypto__elem {
+			& .elem {
 				font-family: PTSans;
 				font-size: 24px;
 				line-height: 36px;
