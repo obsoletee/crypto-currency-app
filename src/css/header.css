@@ -1,0 +1,82 @@
+@font-face {
+  font-weight: normal;
+  font-family: "PTSans";
+  src: url("../fonts/PTSans-Regular.ttf");
+}
+@font-face {
+  font-weight: 700;
+  font-family: "PTSans";
+  src: url("../fonts/PTSans-Bold.ttf");
+}
+@font-face {
+  font-weight: normal;
+  font-style: italic;
+  font-family: "PTSans";
+  src: url("../fonts/PTSans-Italic.ttf");
+}
+@font-face {
+  font-weight: 700;
+  font-style: italic;
+  font-family: "PTSans";
+  src: url("../fonts/PTSans-BoldItalic.ttf");
+}
+.header {
+  width: 100%;
+  overflow: hidden;
+  background-color: rgb(204, 204, 204);
+}
+.header .header__container {
+  padding: 30px 5%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 100%;
+}
+.header .header__container .container__info {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+.header .header__container .container__info .container__info__title {
+  font-family: PTSans;
+  font-size: 36px;
+  line-height: 48px;
+  font-weight: 700;
+  margin: 0 5px 0 0;
+}
+.header .header__container .container__info .container__info__logo {
+  width: 48px;
+  height: 48px;
+}
+.header .header__container .container__info .container__info__logo img {
+  width: 100%;
+  height: 100%;
+}
+.header .header__container .container__crypto {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -ms-flex-line-pack: justify;
+      align-content: space-between;
+}
+.header .header__container .container__crypto .container__crypto__elem {
+  font-family: PTSans;
+  font-size: 24px;
+  line-height: 36px;
+}
