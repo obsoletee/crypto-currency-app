@@ -9,9 +9,11 @@ interface ContainerProps {
 	cryptData: object;
 	page: number;
 	setPage: Function;
+	limit: number;
+	setCryptData: Function;
 }
 
-const Container: FC<ContainerProps> = ({dataError, isPostLoading, cryptData, page, setPage}) => {
+const Container: FC<ContainerProps> = ({limit, setCryptData, dataError, isPostLoading, cryptData, page, setPage}) => {
 
 	return (
 		<div className={styles.tableContainer}>
@@ -20,7 +22,7 @@ const Container: FC<ContainerProps> = ({dataError, isPostLoading, cryptData, pag
 			}
 			{isPostLoading
 				? <Loader/>
-				: <CryptTable setPage={setPage} page={page} cryptData={cryptData}/>
+				: <CryptTable setCryptData={setCryptData} limit={limit} setPage={setPage} page={page} cryptData={cryptData}/>
 			}
 		</div>
 	)

@@ -4,6 +4,7 @@ import Container from './components/Container/Container'
 import Pagination from './components/Pagination/Pagination'
 import { useFetching } from './hooks/useFetching';
 import CryptService from './services/CryptService';
+import { Flex } from 'antd';
 
 function App() {
 
@@ -23,7 +24,18 @@ function App() {
   return (
 		<>
 		<Header/>
-		<Container setPage={setPage} page={page} dataError={dataError} isPostLoading={isPostLoading} cryptData={cryptData}/>
+		<div style={{display: 'flex', justifyContent: 'space-between'}}>
+			<Container limit={limit} setPage={setPage} page={page} dataError={dataError} isPostLoading={isPostLoading} cryptData={cryptData} setCryptData={setCryptData}/>
+			<div>
+				<div>
+					<div>Ваш портфель</div>
+					<div>Сумма</div>
+					<div>Изменение</div>
+					<div>Подробнее</div>
+				</div>
+			</div>
+		</div>
+		
 		</>
   )
 }

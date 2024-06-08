@@ -5,15 +5,16 @@ import Button from "../UI/Button/Button";
 interface PaginationProps {
 	page: number;
 	setPage: Function;
+	limit: number;
 }
 
-const Pagination: FC<PaginationProps> = ({page, setPage}) => {
+const Pagination: FC<PaginationProps> = ({limit, page, setPage}) => {
 
 	const previousPage = (e: React.MouseEvent<HTMLButtonElement>) => {
 		e.preventDefault;
 		page === 0 
 		? setPage(0)
-		: setPage(page -= 10);
+		: setPage(page -= limit);
 		}
 	
 
@@ -21,7 +22,7 @@ const Pagination: FC<PaginationProps> = ({page, setPage}) => {
 		e.preventDefault;
 		page === 2000
 		? setPage(2000)
-		: setPage(page += 10);
+		: setPage(page += limit);
 	}
 
 	return (

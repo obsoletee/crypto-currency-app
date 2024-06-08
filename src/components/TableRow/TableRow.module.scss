@@ -2,8 +2,9 @@
 	border: 1px solid black;
   border-collapse: collapse;
 	padding: 5px 10px;	
+	
 }
 
-tr:hover {
+.tableBodyRow:hover {
 	background-color: rgb(226, 226, 226);
 }
