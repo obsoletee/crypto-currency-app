@@ -1,10 +1,12 @@
 @import "/src/scss/fonts.scss";
 
 .button {
+	margin: 5px;
 	font-family: "PTSans";
 	padding: 10px 20px;
 	font-size: 1rem;
 	line-height: 2rem;
+	border: 1px solid black;
 }
 
 .button:hover {

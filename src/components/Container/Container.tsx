@@ -11,9 +11,11 @@ interface ContainerProps {
 	setPage: Function;
 	limit: number;
 	setCryptData: Function;
+	setSearchQuery: Function;
+	searchQuery: string;
 }
 
-const Container: FC<ContainerProps> = ({limit, setCryptData, dataError, isPostLoading, cryptData, page, setPage}) => {
+const Container: FC<ContainerProps> = ({searchQuery, setSearchQuery, limit, setCryptData, dataError, isPostLoading, cryptData, page, setPage}) => {
 
 	return (
 		<div className={styles.tableContainer}>
@@ -22,7 +24,7 @@ const Container: FC<ContainerProps> = ({limit, setCryptData, dataError, isPostLo
 			}
 			{isPostLoading
 				? <Loader/>
-				: <CryptTable setCryptData={setCryptData} limit={limit} setPage={setPage} page={page} cryptData={cryptData}/>
+				: <CryptTable setSearchQuery={setSearchQuery} searchQuery={searchQuery} setCryptData={setCryptData} limit={limit} setPage={setPage} page={page} cryptData={cryptData}/>
 			}
 		</div>
 	)

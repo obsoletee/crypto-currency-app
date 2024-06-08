@@ -2,6 +2,7 @@ import styles from './CryptTable.module.scss';
 import TableRow from '../TableRow/TableRow';
 import { FC, useState } from 'react';
 import Pagination from '../Pagination/Pagination';
+import Input from '../UI/Input/Input';
 
 interface CryptTableProps {
 	cryptData: object;
@@ -9,11 +10,14 @@ interface CryptTableProps {
 	setPage: Function;
 	limit: number;
 	setCryptData: Function;
+	setSearchQuery: Function;
+	searchQuery: string;
 }
 
-const CryptTable: FC<CryptTableProps> = ({limit, setCryptData, cryptData, page, setPage}) => {
+const CryptTable: FC<CryptTableProps> = ({searchQuery, setSearchQuery, limit, setCryptData, cryptData, page, setPage}) => {
 	
 	const [selectedSort, setSelectedSort] = useState();
+
 	const sortData = (e: object) => {
 		const currentSort = e.target.id;
 
@@ -26,9 +30,7 @@ const CryptTable: FC<CryptTableProps> = ({limit, setCryptData, cryptData, page, 
 			setCryptData([...cryptData].sort(function(a, b) {return b[currentSort] - a[currentSort];}));
 			e.target.classList.remove('asc');
 			e.target.classList.add('desc');
-		}
-		
-		
+		}		
 	}
 
 	const columns = [
@@ -73,7 +75,7 @@ const CryptTable: FC<CryptTableProps> = ({limit, setCryptData, cryptData, page, 
 				{cryptData.map(elem => <TableRow coinId={elem.id} key={elem.id} symbol={elem.symbol} price={elem.priceUsd} marketCap={elem.marketCapUsd} change={elem.changePercent24Hr}/>)}
 			</tbody>
 		</table>
-		<Pagination limit={limit} setPage={setPage} page={page}/>
+		<Pagination cryptData={cryptData} limit={limit} setPage={setPage} page={page}/>
 		</>
 	)
 }
