@@ -58,7 +58,7 @@ const CryptTable: FC<CryptTableProps> = ({searchQuery, setSearchQuery, limit, se
 			sortType: 'changePercent24Hr',
     },
     {
-      title: 'Add',
+      title: 'Actions',
       key: 'action',
     },
   ];

@@ -24,7 +24,7 @@ const TableRow: FC<TableRowData> = ({symbol, price, marketCap, change, coinId}) 
 					? <td key="" style={{color: "green"}} className={styles.tableBodyCell}>{Number(change).toFixed(2)}</td>
 					: <td style={{color: "red"}} className={styles.tableBodyCell}>{Number(change).toFixed(2)}</td>
 				}
-				<td className={styles.tableBodyCell}><AddButton>Добавить</AddButton></td>
+				<td className={styles.tableBodyCell}><AddButton>Add To Portfolio</AddButton></td>
 		</tr>
 	)
 }

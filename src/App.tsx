@@ -21,6 +21,7 @@ function App() {
 
 	const onChangeInputHandler = (e) => {
 		setSearchQuery(e.target.value);
+		setPage(0);
 	}
 
 
@@ -31,8 +32,10 @@ function App() {
 
   return (
 		<>
-		<Header/>
-			<Input value={searchQuery} onChange={onChangeInputHandler} type="text" placeholder="Search..."></Input>
+			<Header/>
+			<div style={{padding: '10px', width: '100%', overflow: "hidden"}}>
+				<Input value={searchQuery} onChange={onChangeInputHandler} type="text" placeholder="Search..."></Input>
+			</div>
 			<Container searchQuery={searchQuery} setSearchQuery={setSearchQuery} limit={limit} setPage={setPage} 
 			page={page} dataError={dataError} isPostLoading={isPostLoading} 
 			cryptData={cryptData} setCryptData={setCryptData}/>
