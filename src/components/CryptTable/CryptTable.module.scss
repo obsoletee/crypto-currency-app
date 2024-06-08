@@ -1,31 +1,29 @@
 .cryptoTable {
-	table-layout: fixed;
-	border: 1px solid black;
-	border-collapse: collapse;
-	width: 100%;
+  table-layout: fixed;
+  border: 1px solid black;
+  border-collapse: collapse;
+  width: 100%;
 
-	& .tableHead {
-		font-size: 24px;
-		font-family: "PTSans";
-		text-align: center;
-	}
+  & .tableHead {
+    font-size: 24px;
+    font-family: 'PTSans';
+    text-align: center;
+  }
 
-	& .tableBody {
-		font-size: 16px;
-		font-family: "PTSans";
-		text-align: center;
-
-	}
+  & .tableBody {
+    font-size: 16px;
+    font-family: 'PTSans';
+    text-align: center;
+  }
 }
 
 .tableHeadCell {
-		border: 1px solid black;
-		border-collapse: collapse;
-		padding: 5px 10px;
-		cursor: pointer;
+  border: 1px solid black;
+  border-collapse: collapse;
+  padding: 5px 10px;
+  cursor: pointer;
 
-		&:hover {
-			background-color: rgb(202, 202, 202);
-		}
+  &:hover {
+    background-color: rgb(202, 202, 202);
+  }
 }
-

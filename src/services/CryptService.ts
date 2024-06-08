@@ -1,15 +1,20 @@
-import axios from "axios";
+import axios, { AxiosResponse } from 'axios';
+import { ICryptResponse } from '../types/ICrypt';
 
-
-export default class CryptService {
-	static async getAllData(limit: number, offset: number, search: string) {
-		const response = await axios.get("https://api.coincap.io/v2/assets/?_limit=5", {
-			params: {
-				limit,
-				offset,
-				search,
-			}
-		});
-		return response;
-	}
-}
+export const getAllData = async (
+  limit: number,
+  offset: number,
+  search: string,
+): Promise<AxiosResponse<ICryptResponse>> => {
+  const response = await axios.get<ICryptResponse>(
+    'https://api.coincap.io/v2/assets',
+    {
+      params: {
+        limit,
+        offset,
+        search,
+      },
+    },
+  );
+  return response;
+};

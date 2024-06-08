@@ -1,83 +1,105 @@
-import styles from './CryptTable.module.scss';
-import TableRow from '../TableRow/TableRow';
-import { FC, useState } from 'react';
-import Pagination from '../Pagination/Pagination';
-import Input from '../UI/Input/Input';
+import { Dispatch, SetStateAction } from 'react';
+import { Table, Button, Image, Pagination } from 'antd';
+import { ColumnsType } from 'antd/es/table';
+
+import { ICrypt } from '../../types/ICrypt';
 
 interface CryptTableProps {
-	cryptData: object;
-	page: number;
-	setPage: Function;
-	limit: number;
-	setCryptData: Function;
-	setSearchQuery: Function;
-	searchQuery: string;
+  cryptData?: ICrypt[];
+  isLoading: boolean;
+  page: number;
+  setPage: Dispatch<SetStateAction<number>>;
+  setLimit: Dispatch<SetStateAction<number>>;
 }
 
-const CryptTable: FC<CryptTableProps> = ({searchQuery, setSearchQuery, limit, setCryptData, cryptData, page, setPage}) => {
-	
-	const [selectedSort, setSelectedSort] = useState();
+interface DataType {
+  key: string;
+  symbol: string;
+  logo: JSX.Element;
+  priceUsd: string;
+  marketCapUsd: string;
+  changePercent24Hr: string;
+  action: JSX.Element;
+}
 
-	const sortData = (e: object) => {
-		const currentSort = e.target.id;
+export const CryptTable = ({
+  setLimit,
+  page,
+  setPage,
+  cryptData,
+  isLoading,
+}: CryptTableProps) => {
+  const dataSource = cryptData?.map((crypt, index) => ({
+    key: index.toString(),
+    symbol: crypt.symbol,
+    logo: (
+      <Image
+        src={`https://assets.coincap.io/assets/icons/${crypt.symbol.toLowerCase()}@2x.png`}
+        height={50}
+        width={50}
+        alt={crypt.symbol}
+      />
+    ),
+    priceUsd: Number(crypt.priceUsd).toFixed(2),
+    marketCapUsd: Number(crypt.marketCapUsd).toFixed(2),
+    changePercent24Hr: Number(crypt.changePercent24Hr).toFixed(2),
+    action: (
+      <Button shape={'round'} size={'middle'} type={'primary'}>
+        Add
+      </Button>
+    ),
+  }));
 
-		if(e.target.classList.contains('desc')) {
-			setCryptData([...cryptData].sort(function(a, b) {return a[currentSort] - b[currentSort];}));
-			e.target.classList.add('asc');
-			e.target.classList.remove('desc');
-		}
-		else {
-			setCryptData([...cryptData].sort(function(a, b) {return b[currentSort] - a[currentSort];}));
-			e.target.classList.remove('asc');
-			e.target.classList.add('desc');
-		}		
-	}
-
-	const columns = [
+  const columns: ColumnsType<DataType> = [
     {
       title: 'Symbol',
+      dataIndex: 'symbol',
       key: 'symbol',
+      sorter: (a, b) => a.symbol.localeCompare(b.symbol),
     },
-    {
-      title: 'Logo',
-      key: 'logo',
-    },
+    { title: 'Logo', dataIndex: 'logo', key: 'logo' },
     {
       title: 'Price (USD)',
+      dataIndex: 'priceUsd',
       key: 'priceUsd',
-			sortType: 'priceUsd',
+      sorter: (a, b) => parseFloat(a.priceUsd) - parseFloat(b.priceUsd),
     },
     {
       title: 'Market Cap (USD)',
+      dataIndex: 'marketCapUsd',
       key: 'marketCapUsd',
-			sortType: 'marketCapUsd',
+      sorter: (a, b) => parseFloat(a.marketCapUsd) - parseFloat(b.marketCapUsd),
     },
     {
       title: '24h Change (%)',
+      dataIndex: 'changePercent24Hr',
       key: 'changePercent24Hr',
-			sortType: 'changePercent24Hr',
+      sorter: (a, b) =>
+        parseFloat(a.changePercent24Hr) - parseFloat(b.changePercent24Hr),
     },
-    {
-      title: 'Actions',
-      key: 'action',
-    },
+    { title: 'Add', dataIndex: 'action', key: 'action' },
   ];
 
-	return (
-		<>
-		<table className={styles.cryptoTable}>
-			<thead className={styles.tableHead}>
-				<tr>
-				{columns.map(elem => <th key={elem.key} id={elem.sortType} onClick={sortData} className={styles.tableHeadCell}>{elem.title}</th>)}
-				</tr>
-			</thead>
-			<tbody className={styles.tableBody}>
-				{cryptData.map(elem => <TableRow coinId={elem.id} key={elem.id} symbol={elem.symbol} price={elem.priceUsd} marketCap={elem.marketCapUsd} change={elem.changePercent24Hr}/>)}
-			</tbody>
-		</table>
-		<Pagination cryptData={cryptData} limit={limit} setPage={setPage} page={page}/>
-		</>
-	)
-}
+  const handleSizeChange = (current: number, size: number) => {
+    setLimit(size);
+    setPage(current);
+  };
 
-export default CryptTable;
+  return (
+    <>
+      <Table
+        loading={isLoading}
+        dataSource={dataSource}
+        columns={columns}
+        pagination={false}
+      />
+      <Pagination
+        showSizeChanger
+        onShowSizeChange={handleSizeChange}
+        current={page}
+        onChange={setPage}
+        total={2000}
+      />
+    </>
+  );
+};
