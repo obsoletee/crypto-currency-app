@@ -1,15 +1,16 @@
 import { Dispatch, SetStateAction } from 'react';
-import { Table, Button, Image, Pagination } from 'antd';
+import { Table, Button, Image } from 'antd';
 import { ColumnsType } from 'antd/es/table';
 
 import { ICrypt } from '../../types/ICrypt';
+import { PaginationBlock } from '../Pagination/PaginationBlock';
 
 interface CryptTableProps {
   cryptData?: ICrypt[];
   isLoading: boolean;
-  page: number;
-  setPage: Dispatch<SetStateAction<number>>;
   setLimit: Dispatch<SetStateAction<number>>;
+  limit: number;
+  setOffset: Dispatch<SetStateAction<number>>;
 }
 
 interface DataType {
@@ -23,9 +24,9 @@ interface DataType {
 }
 
 export const CryptTable = ({
+  limit,
+  setOffset,
   setLimit,
-  page,
-  setPage,
   cryptData,
   isLoading,
 }: CryptTableProps) => {
@@ -80,11 +81,6 @@ export const CryptTable = ({
     { title: 'Add', dataIndex: 'action', key: 'action' },
   ];
 
-  const handleSizeChange = (current: number, size: number) => {
-    setLimit(size);
-    setPage(current);
-  };
-
   return (
     <>
       <Table
@@ -92,13 +88,12 @@ export const CryptTable = ({
         dataSource={dataSource}
         columns={columns}
         pagination={false}
+        scroll={{ x: true }}
       />
-      <Pagination
-        showSizeChanger
-        onShowSizeChange={handleSizeChange}
-        current={page}
-        onChange={setPage}
-        total={2000}
+      <PaginationBlock
+        setOffset={setOffset}
+        limit={limit}
+        setLimit={setLimit}
       />
     </>
   );

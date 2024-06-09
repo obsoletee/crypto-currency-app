@@ -1,5 +1,4 @@
 import { useState } from 'react';
-
 import { AxiosResponse } from 'axios';
 
 interface UseFetchingProps<T> {
