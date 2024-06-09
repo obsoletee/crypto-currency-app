@@ -37,6 +37,32 @@ export const CryptInfo = ({ dataSource }: CryptInfoProps) => {
           <Button>Add</Button>
         </div>
       </div>
+      <div className={styles.chartContainer}>
+        <div>
+          <label htmlFor="startDate-select">Start Date: </label>
+          <Select
+            options={[
+              { value: '1', label: '1 Day' },
+              { value: '7', label: '7 Days' },
+              { value: '30', label: '1 Month' },
+            ]}
+            value={selectedDaysAgo.toString()}
+            onChange={(value) => {
+              const daysAgo = Number(value);
+              setSelectedDaysAgo(daysAgo);
+              setStartDate(getUnixTimeForDaysAgo(daysAgo));
+            }}
+          />
+        </div>
+        <div>
+          <CryptHistoryChart
+            id={`${id}`}
+            interval={interval}
+            start={startDate}
+            end={endTime}
+          />
+        </div>
+      </div>
     </>
   );
 };
