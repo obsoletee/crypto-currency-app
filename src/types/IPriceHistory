@@ -1,0 +1,9 @@
+export interface IPriceHistory {
+  priceUsd: string;
+  time: number;
+}
+
+export interface IPriceHistoryResponse {
+  data: IPriceHistory[];
+  timestamp: number;
+}
