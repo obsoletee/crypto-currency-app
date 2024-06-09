@@ -1,6 +1,6 @@
 import axios, { AxiosResponse } from 'axios';
 import { ICryptResponse } from '../types/ICrypt';
-import IPriceHistoryResponse from '../types/IPriceHistory';
+import { IPriceHistoryResponse } from '../types/IPriceHistory';
 
 export const getAllData = async (
   limit?: number,
@@ -22,7 +22,7 @@ export const getAllData = async (
 
 export const getPriceHistory = async (id: string, interval: string) => {
   const response = await axios.get<IPriceHistoryResponse>(
-    `https://api.coincap.io/v2/${id}/history`,
+    `https://api.coincap.io/v2/assets/${id}/history`,
     {
       params: {
         interval,

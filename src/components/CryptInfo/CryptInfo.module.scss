@@ -24,4 +24,14 @@
 }
 
 .chartContainer {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 30px;
+  width: 100%;
+  .graph {
+    width: 50%;
+    height: 300px;
+  }
 }

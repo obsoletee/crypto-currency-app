@@ -1,46 +1,65 @@
 import { useEffect, useState } from 'react';
 import { Button, Input, Select } from 'antd';
+import { Line } from 'react-chartjs-2';
 import {
-  ResponsiveContainer,
-  LineChart,
-  XAxis,
-  YAxis,
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
   Tooltip,
   Legend,
-  Line,
-  CartesianGrid,
-} from 'recharts';
+} from 'chart.js';
 
-import { ICrypt, ICryptResponse } from '../../types/ICrypt';
-import styles from './CryptInfo.module.scss';
+import { ICrypt } from '../../types/ICrypt';
 import { useFetching } from '../../hooks/useFetching';
-import { getAllData, getPriceHistory } from '../../services/CryptService';
+import { getPriceHistory } from '../../services/CryptService';
+import { IPriceHistoryResponse } from '../../types/IPriceHistory';
+import styles from './CryptInfo.module.scss';
+
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend,
+);
 
 interface CryptInfoProps {
   dataSource: ICrypt;
 }
 
 export const CryptInfo = ({ dataSource }: CryptInfoProps) => {
-  const [period, setPeriod] = useState('1d');
+  const [period, setPeriod] = useState('m1');
 
-  const { data, fetching: fetchData } = useFetching<ICryptResponse>({
+  const { data, fetching: fetchData } = useFetching<IPriceHistoryResponse>({
     callback: () => getPriceHistory(dataSource.name.toLowerCase(), period),
   });
-
-  const [chartData, setChartData] = useState(data?.data);
 
   const handlePeriodChange = (value: string) => {
     setPeriod(value);
   };
 
-  const formatTimestamp = (timestamp: number) => {
-    const date = new Date(timestamp);
-    return `${date.getUTCDate()}/${date.getUTCMonth() + 1}/${date.getUTCFullYear()}`;
-  };
-
   useEffect(() => {
     fetchData();
   }, [period]);
+
+  const chartData = {
+    labels: data?.data.map((point) =>
+      new Date(point.date).toLocaleDateString(),
+    ),
+    datasets: [
+      {
+        label: 'Price (USD)',
+        data: data?.data.map((point) => point.priceUsd),
+        borderColor: '#8884d8',
+        fill: false,
+      },
+    ],
+  };
 
   return (
     <>
@@ -87,35 +106,23 @@ export const CryptInfo = ({ dataSource }: CryptInfoProps) => {
         </div>
       </div>
       <div className={styles.chartContainer}>
-        <Select
-          defaultValue="1d"
-          style={{ width: 120 }}
-          onChange={handlePeriodChange}
-        >
-          <option value="1d">1 Day</option>
-          <option value="7d">7 Days</option>
-          <option value="30d">30 Days</option>
-        </Select>
-        <ResponsiveContainer width="100%" height={400}>
-          <LineChart
-            data={chartData?.map((point) => ({
-              ...point,
-              time: formatTimestamp(point.time),
-            }))}
+        <div>
+          <Select
+            placeholder="Select Interval..."
+            onChange={handlePeriodChange}
           >
-            <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="time" />
-            <YAxis />
-            <Tooltip />
-            <Legend />
-            <Line
-              type="monotone"
-              dataKey="priceUsd"
-              stroke="#8884d8"
-              activeDot={{ r: 8 }}
-            />
-          </LineChart>
-        </ResponsiveContainer>
+            <Select.Option value="m1">1 Hour</Select.Option>
+            <Select.Option value="m5">12 Hours</Select.Option>
+            <Select.Option value="m15">1 Day</Select.Option>
+          </Select>
+        </div>
+        <div>
+          <Line
+            className={styles.graph}
+            data={chartData}
+            options={{ maintainAspectRatio: false }}
+          />
+        </div>
       </div>
     </>
   );
