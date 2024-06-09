@@ -74,19 +74,19 @@ export const CryptInfo = ({ dataSource }: CryptInfoProps) => {
         <div>Symbol: {dataSource.symbol}</div>
         <div>Rank: {dataSource.rank}</div>
         <div>
-          Price (USD):{' '}
+          Price (USD):
           {window.innerWidth > 420
             ? dataSource.priceUsd
             : Number(dataSource.priceUsd).toFixed(2)}
         </div>
         <div>
-          Market Capitalization (USD):{' '}
+          Market Capitalization (USD):
           {window.innerWidth > 420
             ? dataSource.marketCapUsd
             : Number(dataSource.marketCapUsd).toFixed(2)}
         </div>
         <div>
-          Max Supply:{' '}
+          Max Supply:
           {dataSource.maxSupply
             ? window.innerWidth > 420
               ? dataSource.maxSupply
