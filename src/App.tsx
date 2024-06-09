@@ -1,5 +1,10 @@
+import { BrowserRouter } from 'react-router-dom';
 import { Layout } from './components/Layout/Layout';
 
 export const App = () => {
-  return <Layout />;
+  return (
+    <BrowserRouter>
+      <Layout />
+    </BrowserRouter>
+  );
 };

@@ -4,6 +4,7 @@ import { ColumnsType } from 'antd/es/table';
 
 import { ICrypt } from '../../types/ICrypt';
 import { PaginationBlock } from '../Pagination/PaginationBlock';
+import { useNavigate } from 'react-router-dom';
 
 interface CryptTableProps {
   cryptData?: ICrypt[];
@@ -30,6 +31,8 @@ export const CryptTable = ({
   cryptData,
   isLoading,
 }: CryptTableProps) => {
+  const navigate = useNavigate();
+
   const dataSource = cryptData?.map((crypt, index) => ({
     key: index.toString(),
     symbol: crypt.symbol,
@@ -81,6 +84,10 @@ export const CryptTable = ({
     { title: 'Add', dataIndex: 'action', key: 'action' },
   ];
 
+  const onRowClick = (record: DataType) => {
+    navigate(`/id${record.symbol.toLowerCase()}`);
+  };
+
   return (
     <>
       <Table
@@ -89,6 +96,9 @@ export const CryptTable = ({
         columns={columns}
         pagination={false}
         scroll={{ x: true }}
+        onRow={(record) => ({
+          onClick: () => onRowClick(record),
+        })}
       />
       <PaginationBlock
         setOffset={setOffset}
