@@ -102,7 +102,14 @@ export const CryptInfo = ({ dataSource }: CryptInfoProps) => {
           <Input type="number" value={1}></Input>
         </div>
         <div>
-          <Button>Add</Button>
+          <Button
+            onClick={(e) => {
+              e.stopPropagation();
+              showModal(dataSource);
+            }}
+          >
+            Add
+          </Button>
         </div>
       </div>
       <div className={styles.chartContainer}>

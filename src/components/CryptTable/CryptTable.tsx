@@ -12,6 +12,7 @@ interface CryptTableProps {
   setLimit: Dispatch<SetStateAction<number>>;
   limit: number;
   setOffset: Dispatch<SetStateAction<number>>;
+  showModal: (crypt: ICrypt) => void;
 }
 
 interface DataType {
@@ -30,6 +31,7 @@ export const CryptTable = ({
   setLimit,
   cryptData,
   isLoading,
+  showModal,
 }: CryptTableProps) => {
   const navigate = useNavigate();
 
@@ -39,8 +41,8 @@ export const CryptTable = ({
     logo: (
       <Image
         src={`https://assets.coincap.io/assets/icons/${crypt.symbol.toLowerCase()}@2x.png`}
-        height={50}
-        width={50}
+        height={40}
+        width={40}
         alt={crypt.symbol}
       />
     ),
@@ -48,7 +50,15 @@ export const CryptTable = ({
     marketCapUsd: Number(crypt.marketCapUsd).toFixed(2),
     changePercent24Hr: Number(crypt.changePercent24Hr).toFixed(2),
     action: (
-      <Button shape={'round'} size={'middle'} type={'primary'}>
+      <Button
+        onClick={(e) => {
+          e.stopPropagation();
+          showModal(crypt);
+        }}
+        shape={'round'}
+        size={'middle'}
+        type={'primary'}
+      >
         Add
       </Button>
     ),

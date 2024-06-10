@@ -1,8 +1,8 @@
 import { useParams } from 'react-router-dom';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Empty, Spin } from 'antd';
 
-import { ICryptResponse } from '../types/ICrypt';
+import { ICrypt, ICryptResponse } from '../types/ICrypt';
 import { useFetching } from '../hooks/useFetching';
 import { getAllData } from '../services/CryptService';
 import { CryptInfo } from '../components/CryptInfo/CryptInfo';

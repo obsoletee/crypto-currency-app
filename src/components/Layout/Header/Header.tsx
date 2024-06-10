@@ -1,7 +1,26 @@
 import { Link } from 'react-router-dom';
 import styles from './header.module.scss';
+import { useFetching } from '../../../hooks/useFetching';
+import { ICryptResponse } from '../../../types/ICrypt';
+import { getAllData } from '../../../services/CryptService';
+import { useEffect } from 'react';
+import { Spin } from 'antd';
 
 export const Header = () => {
+  const {
+    data,
+    fetching: fetchData,
+    isPostLoading,
+  } = useFetching<ICryptResponse>({
+    callback: () => getAllData(),
+  });
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  const dataSource = data?.data.filter((crypt) => Number(crypt.rank) < 4);
+
   return (
     <header className={styles.header}>
       <div className={styles.container}>
@@ -17,9 +36,15 @@ export const Header = () => {
           </div>
         </div>
         <div className={styles.crypto}>
-          <div className={styles.elem}>BTC</div>
-          <div className={styles.elem}>ETH</div>
-          <div className={styles.elem}>BNB</div>
+          {isPostLoading ? (
+            <Spin />
+          ) : (
+            dataSource?.map((crypt) => (
+              <div key={crypt.symbol} className={styles.elem}>
+                {crypt.symbol}: {Number(crypt.priceUsd).toFixed(2)}
+              </div>
+            ))
+          )}
         </div>
       </div>
     </header>
