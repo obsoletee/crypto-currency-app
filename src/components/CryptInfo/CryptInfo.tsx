@@ -18,6 +18,7 @@ import { ICrypt } from '../../types/ICrypt';
 import { IPriceHistoryResponse } from '../../types/IPriceHistory';
 import { MyModal } from '../UI/Modal/MyModal';
 import styles from './CryptInfo.module.scss';
+import { useNavigate } from 'react-router-dom';
 
 ChartJS.register(
   CategoryScale,
@@ -70,6 +71,12 @@ export const CryptInfo = ({ dataSource }: CryptInfoProps) => {
     setModalData(crypt);
   };
 
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    navigate(`/`);
+  };
+
   return (
     <>
       <div className={styles.info}>
@@ -105,7 +112,7 @@ export const CryptInfo = ({ dataSource }: CryptInfoProps) => {
       </div>
       <div className={styles.addToPortfolio}>
         <div>
-          <Button size="large" href="/">
+          <Button size="large" onClick={handleClick}>
             Back
           </Button>
         </div>

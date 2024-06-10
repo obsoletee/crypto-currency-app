@@ -33,8 +33,6 @@ export const CryptTable = ({
   isLoading,
   showModal,
 }: CryptTableProps) => {
-  const navigate = useNavigate();
-
   const dataSource = cryptData?.map((crypt, index) => ({
     key: index.toString(),
     symbol: crypt.symbol,
@@ -93,6 +91,8 @@ export const CryptTable = ({
     },
     { title: 'Add', dataIndex: 'action', key: 'action' },
   ];
+
+  const navigate = useNavigate();
 
   const onRowClick = (record: DataType) => {
     navigate(`/id${record.symbol.toLowerCase()}`);
