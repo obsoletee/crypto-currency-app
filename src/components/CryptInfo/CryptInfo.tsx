@@ -140,9 +140,9 @@ export const CryptInfo = ({ dataSource }: CryptInfoProps) => {
             placeholder="Select Interval..."
             onChange={handlePeriodChange}
           >
-            <Select.Option value="m1">1 Hour</Select.Option>
-            <Select.Option value="m5">12 Hours</Select.Option>
-            <Select.Option value="m15">1 Day</Select.Option>
+            <Select.Option value="m1">1 Day</Select.Option>
+            <Select.Option value="h1">1 Month</Select.Option>
+            <Select.Option value="d1">1 Year</Select.Option>
           </Select>
         </div>
         <div>

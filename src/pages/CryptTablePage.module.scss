@@ -1,0 +1,19 @@
+$tableWidth: 70%;
+
+.container {
+  padding: 20px;
+  @media (max-width: 768px) {
+    text-align: center;
+  }
+  @media (min-width: 768px) {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    & .table {
+      width: $tableWidth;
+    }
+    & .portfolio {
+      width: 100% - $tableWidth;
+    }
+  }
+}

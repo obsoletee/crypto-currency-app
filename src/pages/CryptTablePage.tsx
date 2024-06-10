@@ -7,6 +7,7 @@ import { Search } from '../components/Search/Search';
 import { useFetching } from '../hooks/useFetching';
 import { getAllData } from '../services/CryptService';
 import { ICrypt, ICryptResponse } from '../types/ICrypt';
+import styles from './CryptTablePage.module.scss';
 
 export const CryptTablePage = () => {
   const [limit, setLimit] = useState<number>(10);
@@ -41,15 +42,9 @@ export const CryptTablePage = () => {
   };
 
   return (
-    <div
-      style={{
-        display: 'flex',
-        justifyContent: 'space-between',
-        flexWrap: 'wrap',
-      }}
-    >
+    <div className={styles.container}>
       {/* я не знаю можно писать стили так или надо выносить в модуль */}
-      <div style={{ padding: '20px', width: '70%' }}>
+      <div className={styles.table}>
         <Search searchQuery={searchQuery} handleChange={handleChange} />
         <CryptTable
           showModal={showModal}
@@ -60,7 +55,7 @@ export const CryptTablePage = () => {
           isLoading={isPostLoading}
         />
       </div>
-      <div style={{ padding: '20px', width: '30%' }}>
+      <div className={styles.portfolio}>
         <Portfolio />
         <MyModal
           modalData={modalData}
