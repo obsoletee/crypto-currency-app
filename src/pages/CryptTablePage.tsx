@@ -43,7 +43,6 @@ export const CryptTablePage = () => {
 
   return (
     <div className={styles.container}>
-      {/* я не знаю можно писать стили так или надо выносить в модуль */}
       <div className={styles.table}>
         <Search searchQuery={searchQuery} handleChange={handleChange} />
         <CryptTable

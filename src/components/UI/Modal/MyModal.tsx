@@ -1,7 +1,9 @@
 import { Dispatch, SetStateAction, useState } from 'react';
 import { Input, Modal } from 'antd';
 
+import { usePortfolioContext } from '../../../PortfolioContext/PortfolioContext';
 import { ICrypt } from '../../../types/ICrypt';
+import { PortfolioItem } from '../../../PortfolioContext/PortfolioContext';
 
 interface MyModalProps {
   isModalVisible: boolean;
@@ -16,31 +18,22 @@ export const MyModal = ({
 }: MyModalProps) => {
   const [coinCount, setCoinCount] = useState(1);
   const [errorMessage, setErrorMessage] = useState('');
+  const { addToPortfolio } = usePortfolioContext();
+
   const handleOk = () => {
-    if (coinCount < 1) {
-      setErrorMessage('Enter correct count.');
-    } else {
-      setIsModalVisible(false);
-      const localData = {
-        key: modalData?.id,
-        symbol: modalData?.symbol,
-        price: modalData?.priceUsd,
-        count: coinCount,
-      };
-      if (localData.key) {
-        localStorage.setItem(
-          localData.key + localStorage.length,
-          JSON.stringify(localData),
-        );
-      }
-    }
-    setCoinCount(1);
+    const localData: PortfolioItem = {
+      id: modalData!.id,
+      symbol: modalData!.symbol,
+      price: modalData!.priceUsd,
+      count: coinCount,
+    };
+    addToPortfolio(localData);
     setErrorMessage('');
+    setIsModalVisible(false);
   };
 
   const handleCancel = () => {
     setIsModalVisible(false);
-    setCoinCount(1);
     setErrorMessage('');
   };
 
@@ -56,6 +49,7 @@ export const MyModal = ({
           {modalData?.name} ({modalData?.symbol})
         </p>
         <Input
+          defaultValue={1}
           type="number"
           value={coinCount}
           onChange={(e) => {

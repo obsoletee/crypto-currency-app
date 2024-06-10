@@ -77,6 +77,46 @@ export const CryptInfo = ({ dataSource }: CryptInfoProps) => {
     navigate(`/`);
   };
 
+  const chartOptions = {
+    maintainAspectRatio: false,
+    scales: {
+      y: {
+        ticks: {
+          beginAtZero: true,
+          font: {
+            size: 14,
+          },
+          color: '#333',
+        },
+        grid: {
+          color: 'rgba(200,200,200,0.3)',
+        },
+      },
+      x: {
+        ticks: {
+          font: {
+            size: 14,
+          },
+          color: '#333',
+        },
+        grid: {
+          color: 'rgba(200,200,200,0.3)',
+        },
+      },
+    },
+    plugins: {
+      legend: {
+        display: true,
+        labels: {
+          font: {
+            size: 16,
+          },
+          color: '#333',
+        },
+      },
+    },
+  };
+
   return (
     <>
       <div className={styles.info}>
@@ -149,7 +189,7 @@ export const CryptInfo = ({ dataSource }: CryptInfoProps) => {
           <Line
             className={styles.graph}
             data={chartData}
-            options={{ maintainAspectRatio: false }}
+            options={chartOptions}
           />
         </div>
       </div>
