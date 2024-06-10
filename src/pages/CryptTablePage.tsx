@@ -1,12 +1,12 @@
 import { ChangeEvent, useEffect, useState } from 'react';
 
 import { CryptTable } from '../components/CryptTable/CryptTable';
-import { getAllData } from '../services/CryptService';
-import { ICrypt, ICryptResponse } from '../types/ICrypt';
+import { MyModal } from '../components/UI/Modal/MyModal';
+import { Portfolio } from '../components/Portfolio/Portfolio';
 import { Search } from '../components/Search/Search';
 import { useFetching } from '../hooks/useFetching';
-import { Portfolio } from '../components/Portfolio/Portfolio';
-import { MyModal } from '../components/UI/Modal/MyModal';
+import { getAllData } from '../services/CryptService';
+import { ICrypt, ICryptResponse } from '../types/ICrypt';
 
 export const CryptTablePage = () => {
   const [limit, setLimit] = useState<number>(10);
@@ -61,7 +61,7 @@ export const CryptTablePage = () => {
         />
       </div>
       <div style={{ padding: '20px', width: '30%' }}>
-        <Portfolio cleanData={cleanData} />
+        <Portfolio />
         <MyModal
           modalData={modalData}
           isModalVisible={isModalVisible}

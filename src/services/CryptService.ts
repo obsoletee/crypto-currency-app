@@ -1,4 +1,5 @@
 import axios, { AxiosResponse } from 'axios';
+
 import { ICryptResponse } from '../types/ICrypt';
 import { IPriceHistoryResponse } from '../types/IPriceHistory';
 

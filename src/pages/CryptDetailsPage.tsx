@@ -1,11 +1,11 @@
-import { useParams } from 'react-router-dom';
-import { useEffect, useState } from 'react';
 import { Empty, Spin } from 'antd';
+import { useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 
-import { ICrypt, ICryptResponse } from '../types/ICrypt';
+import { CryptInfo } from '../components/CryptInfo/CryptInfo';
 import { useFetching } from '../hooks/useFetching';
 import { getAllData } from '../services/CryptService';
-import { CryptInfo } from '../components/CryptInfo/CryptInfo';
+import { ICryptResponse } from '../types/ICrypt';
 
 export const CryptDetailsPage = () => {
   const { id } = useParams<{ id: string }>();

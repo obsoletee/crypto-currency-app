@@ -1,10 +1,10 @@
-import { Dispatch, SetStateAction } from 'react';
-import { Table, Button, Image } from 'antd';
+import { Button, Image, Table } from 'antd';
 import { ColumnsType } from 'antd/es/table';
+import { Dispatch, SetStateAction } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import { ICrypt } from '../../types/ICrypt';
 import { PaginationBlock } from '../Pagination/PaginationBlock';
-import { useNavigate } from 'react-router-dom';
 
 interface CryptTableProps {
   cryptData?: ICrypt[];

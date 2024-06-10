@@ -1,10 +1,12 @@
-import { Link } from 'react-router-dom';
-import styles from './header.module.scss';
-import { useFetching } from '../../../hooks/useFetching';
-import { ICryptResponse } from '../../../types/ICrypt';
-import { getAllData } from '../../../services/CryptService';
-import { useEffect } from 'react';
 import { Spin } from 'antd';
+import { useEffect } from 'react';
+import { Link } from 'react-router-dom';
+
+import { useFetching } from '../../../hooks/useFetching';
+import { getAllData } from '../../../services/CryptService';
+import { ICryptResponse } from '../../../types/ICrypt';
+
+import styles from './header.module.scss';
 
 export const Header = () => {
   const {

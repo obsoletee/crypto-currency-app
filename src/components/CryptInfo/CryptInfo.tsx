@@ -1,21 +1,22 @@
-import { useEffect, useState } from 'react';
-import { Button, Input, Select } from 'antd';
-import { Line } from 'react-chartjs-2';
+import { Button, Select } from 'antd';
 import {
-  Chart as ChartJS,
   CategoryScale,
+  Chart as ChartJS,
+  Legend,
+  LineElement,
   LinearScale,
   PointElement,
-  LineElement,
   Title,
   Tooltip,
-  Legend,
 } from 'chart.js';
+import { Line } from 'react-chartjs-2';
+import { useEffect, useState } from 'react';
 
-import { ICrypt } from '../../types/ICrypt';
 import { useFetching } from '../../hooks/useFetching';
 import { getPriceHistory } from '../../services/CryptService';
+import { ICrypt } from '../../types/ICrypt';
 import { IPriceHistoryResponse } from '../../types/IPriceHistory';
+import { MyModal } from '../UI/Modal/MyModal';
 import styles from './CryptInfo.module.scss';
 
 ChartJS.register(
@@ -61,6 +62,14 @@ export const CryptInfo = ({ dataSource }: CryptInfoProps) => {
     ],
   };
 
+  const [isModalVisible, setIsModalVisible] = useState(false);
+
+  const [modalData, setModalData] = useState<ICrypt>();
+  const showModal = (crypt: ICrypt) => {
+    setIsModalVisible(true);
+    setModalData(crypt);
+  };
+
   return (
     <>
       <div className={styles.info}>
@@ -76,33 +85,34 @@ export const CryptInfo = ({ dataSource }: CryptInfoProps) => {
         <div>
           Price (USD):
           {window.innerWidth > 420
-            ? dataSource.priceUsd
-            : Number(dataSource.priceUsd).toFixed(2)}
+            ? ' ' + dataSource.priceUsd
+            : ' ' + Number(dataSource.priceUsd).toFixed(2)}
         </div>
         <div>
           Market Capitalization (USD):
           {window.innerWidth > 420
-            ? dataSource.marketCapUsd
-            : Number(dataSource.marketCapUsd).toFixed(2)}
+            ? ' ' + dataSource.marketCapUsd
+            : ' ' + Number(dataSource.marketCapUsd).toFixed(2)}
         </div>
         <div>
           Max Supply:
           {dataSource.maxSupply
             ? window.innerWidth > 420
-              ? dataSource.maxSupply
-              : Number(dataSource.maxSupply).toFixed(2)
+              ? ' ' + dataSource.maxSupply
+              : ' ' + Number(dataSource.maxSupply).toFixed(2)
             : 'Not Found'}
         </div>
-        <Button size="large" href="/">
-          Back
-        </Button>
       </div>
       <div className={styles.addToPortfolio}>
         <div>
-          <Input type="number" value={1}></Input>
+          <Button size="large" href="/">
+            Back
+          </Button>
         </div>
         <div>
           <Button
+            size="large"
+            type="primary"
             onClick={(e) => {
               e.stopPropagation();
               showModal(dataSource);
@@ -111,6 +121,11 @@ export const CryptInfo = ({ dataSource }: CryptInfoProps) => {
             Add
           </Button>
         </div>
+        <MyModal
+          modalData={modalData}
+          isModalVisible={isModalVisible}
+          setIsModalVisible={setIsModalVisible}
+        />
       </div>
       <div className={styles.chartContainer}>
         <div>

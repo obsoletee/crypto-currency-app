@@ -1,5 +1,6 @@
-import { Input, Modal } from 'antd';
 import { Dispatch, SetStateAction, useState } from 'react';
+import { Input, Modal } from 'antd';
+
 import { ICrypt } from '../../../types/ICrypt';
 
 interface MyModalProps {
@@ -26,10 +27,12 @@ export const MyModal = ({
         price: modalData?.priceUsd,
         count: coinCount,
       };
-      localStorage.setItem(
-        localData.key + localStorage.length,
-        JSON.stringify(localData),
-      );
+      if (localData.key) {
+        localStorage.setItem(
+          localData.key + localStorage.length,
+          JSON.stringify(localData),
+        );
+      }
     }
     setCoinCount(1);
     setErrorMessage('');
@@ -60,8 +63,6 @@ export const MyModal = ({
           }}
         />
         <p style={{ color: 'red' }}>{errorMessage}</p>
-        <p>Some contents...</p>
-        <p>Some contents...</p>
       </Modal>
     </>
   );
