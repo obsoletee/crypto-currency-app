@@ -2,10 +2,10 @@ $tableWidth: 70%;
 
 .container {
   padding: 20px;
-  @media (max-width: 768px) {
+  @media (max-width: 900px) {
     text-align: center;
   }
-  @media (min-width: 768px) {
+  @media (min-width: 900px) {
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
