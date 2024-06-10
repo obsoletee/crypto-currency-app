@@ -1,6 +1,3 @@
-import { useFetching } from '../../hooks/useFetching';
-import { getAllData } from '../../services/CryptService';
-import { ICryptResponse } from '../../types/ICrypt';
 import { CryptTable } from './CryptTable';
 import type { Meta, StoryObj } from '@storybook/react';
 
