@@ -56,9 +56,9 @@ export const Portfolio = ({ cryptData }: PortfolioProps) => {
       <Card title="Portfolio" hoverable onClick={handleClick}>
         <div>Total Price: {getTotalPrice()}</div>
         {getTotalChange() > 0 ? (
-          <div style={{ color: 'red' }}>Change: -{getTotalChange()}</div>
+          <div style={{ color: 'red' }}>Change: -{getTotalChange()}%</div>
         ) : (
-          <div style={{ color: 'green' }}>Change: +{getTotalChange()}</div>
+          <div style={{ color: 'green' }}>Change: +{getTotalChange()}%</div>
         )}
         <ModalPortfolio
           portfolio={portfolio}
