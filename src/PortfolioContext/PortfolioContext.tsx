@@ -34,7 +34,6 @@ interface PortfolioProviderProps {
 export const PortfolioProvider: React.FC<PortfolioProviderProps> = ({
   children,
 }) => {
-  //commit !!!!!!!!!!!!  //commit !!!!!!!!!!!!  //commit !!!!!!!!!!!!  //commit !!!!!!!!!!!!  //commit !!!!!!!!!!!!  //commit !!!!!!!!!!!!  //commit !!!!!!!!!!!!  //commit !!!!!!!!!!!!  //commit !!!!!!!!!!!!  //commit !!!!!!!!!!!!  //commit !!!!!!!!!!!!  //commit !!!!!!!!!!!!  //commit !!!!!!!!!!!!  //commit !!!!!!!!!!!!  //commit !!!!!!!!!!!!  //commit !!!!!!!!!!!!  //commit !!!!!!!!!!!!  //commit !!!!!!!!!!!!  //commit !!!!!!!!!!!!  //commit !!!!!!!!!!!!  //commit !!!!!!!!!!!!  //commit !!!!!!!!!!!!  //commit !!!!!!!!!!!!  //commit !!!!!!!!!!!!  //commit !!!!!!!!!!!!  //commit !!!!!!!!!!!!  //commit !!!!!!!!!!!!  //commit !!!!!!!!!!!!  //commit !!!!!!!!!!!!  //commit !!!!!!!!!!!!  //commit !!!!!!!!!!!!  //commit !!!!!!!!!!!!  //commit !!!!!!!!!!!!  //commit !!!!!!!!!!!!  //commit !!!!!!!!!!!!  //commit !!!!!!!!!!!!  //commit !!!!!!!!!!!!  //commit !!!!!!!!!!!!  //commit !!!!!!!!!!!!  //commit !!!!!!!!!!!!  //commit !!!!!!!!!!!!  //commit !!!!!!!!!!!!  //commit !!!!!!!!!!!!  //commit !!!!!!!!!!!!  //commit !!!!!!!!!!!!  //commit !!!!!!!!!!!!  //commit !!!!!!!!!!!!  //commit !!!!!!!!!!!!  //commit !!!!!!!!!!!!  //commit !!!!!!!!!!!!  //commit !!!!!!!!!!!!  //commit !!!!!!!!!!!!  //commit !!!!!!!!!!!!  //commit !!!!!!!!!!!!  //commit !!!!!!!!!!!!  //commit !!!!!!!!!!!!  //commit !!!!!!!!!!!!  //commit !!!!!!!!!!!!  //commit !!!!!!!!!!!!  //commit !!!!!!!!!!!!  //commit !!!!!!!!!!!!  //commit !!!!!!!!!!!!  //commit !!!!!!!!!!!!  //commit !!!!!!!!!!!!
   const {
     storedValue: portfolio,
     setValue: setPortfolio,
@@ -45,7 +44,18 @@ export const PortfolioProvider: React.FC<PortfolioProviderProps> = ({
   });
 
   const addToPortfolio = (item: PortfolioItem) => {
-    setPortfolio([...portfolio, item]);
+    const existingCoin = [...portfolio].find(
+      (crypt) => crypt.symbol === item.symbol,
+    );
+    if (existingCoin) {
+      existingCoin.count += item?.count;
+      setPortfolio([
+        ...portfolio.filter((item) => item.id !== existingCoin.id),
+        existingCoin,
+      ]);
+    } else {
+      setPortfolio([...portfolio, item]);
+    }
   };
 
   const removeFromPortfolio = (itemId: string) => {
@@ -55,33 +65,15 @@ export const PortfolioProvider: React.FC<PortfolioProviderProps> = ({
   const clearPortfolio = () => {
     clearPortfolioInStorage();
   };
-  //commit !!!!!!!!!!!!
-  //commit !!!!!!!!!!!!  //commit !!!!!!!!!!!!  //commit !!!!!!!!!!!!  //commit !!!!!!!!!!!!  //commit !!!!!!!!!!!!  //commit !!!!!!!!!!!!  //commit !!!!!!!!!!!!
-  //commit !!!!!!!!!!!!  //commit !!!!!!!!!!!!
-  //commit !!!!!!!!!!!!
-
-  //commit !!!!!!!!!!!!
-  //commit !!!!!!!!!!!!
-  //commit !!!!!!!!!!!!
-  //commit !!!!!!!!!!!!
-  //commit !!!!!!!!!!!!
-
-  //commit !!!!!!!!!!!!
-  //commit !!!!!!!!!!!!
-  //commit !!!!!!!!!!!!
-  //commit !!!!!!!!!!!!
-
-  //commit !!!!!!!!!!!!
-  //commit !!!!!!!!!!!!
-  //commit !!!!!!!!!!!!
-  //commit !!!!!!!!!!!!
-  //commit !!!!!!!!!!!!
-  //commit !!!!!!!!!!!!
-  //commit !!!!!!!!!!!!
 
   return (
     <PortfolioContext.Provider
-      value={{ portfolio, addToPortfolio, removeFromPortfolio, clearPortfolio }}
+      value={{
+        portfolio,
+        addToPortfolio,
+        removeFromPortfolio,
+        clearPortfolio,
+      }}
     >
       {children}
     </PortfolioContext.Provider>

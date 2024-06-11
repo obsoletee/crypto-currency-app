@@ -1,7 +1,7 @@
 import { ChangeEvent, useEffect, useState } from 'react';
 
 import { CryptTable } from '../components/CryptTable/CryptTable';
-import { MyModal } from '../components/UI/Modal/MyModal';
+import { MyModal } from '../components/UI/Modal/MyModal/MyModal';
 import { Portfolio } from '../components/Portfolio/Portfolio';
 import { Search } from '../components/Search/Search';
 import { useFetching } from '../hooks/useFetching';
@@ -55,7 +55,7 @@ export const CryptTablePage = () => {
         />
       </div>
       <div className={styles.portfolio}>
-        <Portfolio />
+        <Portfolio cryptData={cleanData} />
         <MyModal
           modalData={modalData}
           isModalVisible={isModalVisible}

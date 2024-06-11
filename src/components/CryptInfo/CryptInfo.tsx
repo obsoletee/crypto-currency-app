@@ -16,7 +16,7 @@ import { useFetching } from '../../hooks/useFetching';
 import { getPriceHistory } from '../../services/CryptService';
 import { ICrypt } from '../../types/ICrypt';
 import { IPriceHistoryResponse } from '../../types/IPriceHistory';
-import { MyModal } from '../UI/Modal/MyModal';
+import { MyModal } from '../UI/Modal/MyModal/MyModal';
 import styles from './CryptInfo.module.scss';
 import { useNavigate } from 'react-router-dom';
 

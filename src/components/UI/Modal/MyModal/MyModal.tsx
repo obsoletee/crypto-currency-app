@@ -1,9 +1,9 @@
 import { Dispatch, SetStateAction, useState } from 'react';
 import { Input, Modal } from 'antd';
 
-import { usePortfolioContext } from '../../../PortfolioContext/PortfolioContext';
-import { ICrypt } from '../../../types/ICrypt';
-import { PortfolioItem } from '../../../PortfolioContext/PortfolioContext';
+import { usePortfolioContext } from '../../../../PortfolioContext/PortfolioContext';
+import { ICrypt } from '../../../../types/ICrypt';
+import { PortfolioItem } from '../../../../PortfolioContext/PortfolioContext';
 
 interface MyModalProps {
   isModalVisible: boolean;
