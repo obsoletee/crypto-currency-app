@@ -1,4 +1,4 @@
-import { useState, MouseEvent, useEffect } from 'react';
+import { useState, MouseEvent } from 'react';
 import { Card } from 'antd';
 
 import {
