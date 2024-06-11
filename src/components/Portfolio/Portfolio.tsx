@@ -7,6 +7,7 @@ import {
 } from '../../PortfolioContext/PortfolioContext';
 import { ModalPortfolio } from '../UI/Modal/ModalPortfolio/ModalPortfolio';
 import { ICrypt } from '../../types/ICrypt';
+import styles from './Portfolio.module.scss';
 
 interface PortfolioProps {
   cryptData?: ICrypt[];
@@ -53,12 +54,17 @@ export const Portfolio = ({ cryptData }: PortfolioProps) => {
 
   return (
     <>
-      <Card title="Portfolio" hoverable onClick={handleClick}>
+      <Card
+        className={styles.infoContainer}
+        title="Portfolio"
+        hoverable
+        onClick={handleClick}
+      >
         <div>Total Price: {getTotalPrice()}</div>
         {getTotalChange() > 0 ? (
-          <div style={{ color: 'red' }}>Change: -{getTotalChange()}%</div>
+          <div className={styles.redText}>Change: -{getTotalChange()}%</div>
         ) : (
-          <div style={{ color: 'green' }}>Change: +{getTotalChange()}%</div>
+          <div className={styles.greenText}>Change: +{getTotalChange()}%</div>
         )}
         <ModalPortfolio
           portfolio={portfolio}
